@@ -13,30 +13,30 @@
 <section class="section">
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="field">
-      <label for="user" class="label">Usuari</label>
+      <label for="email" class="label">Email</label>
       <div class="control has-icons-left has-icons-right">
-        <input id="user" class="input" type="text" placeholder="Usuari" [class.is-danger]="userValid" formControlName="user">
+        <input id="email" class="input" type="mail" placeholder="Email" [class.is-danger]="userValid" formControlName="user">
         <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
+          <i class="fas fa-envelope"></i>
         </span>
       </div>
-      <p *ngIf="userValid" class="help is-danger">El camp ha de contenir un nom</p>
+      <p *ngIf="userValid" class="help is-danger">The field must contain an email</p>
     </div>
 
     <div class="field">
-      <label for="password" class="label">Contrasenya</label>
+      <label for="password" class="label">Password</label>
       <div class="control has-icons-left has-icons-right">
-        <input id="password" class="input" type="password" placeholder="Contrasenya" formControlName="password">
+        <input id="password" class="input" type="password" placeholder="Password" [class.is-danger]="passValid" formControlName="password">
         <span class="icon is-small is-left">
           <i class="fas fa-key"></i>
         </span>
       </div>
-      <p *ngIf="passValid" class="help is-danger">El camp ha de contenir una contrasenya valida</p>
+      <p *ngIf="passValid" class="help is-danger">The field must contain a valid password</p>
     </div>
 
     <div class="field">
       <div class="control">
-        <a href="#None" title="No recordo la contrasenya">No recordo la contrasenya</a>
+        <a href="#None" title="I do not remember the password">I don't remember the password</a>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
         <button class="button is-primary">Login</button>
       </div>
       <div class="control">
-        <button class="button is-link">Sigin</button>
+        <button class="button is-link" [routerLink]="['/register']" >Signin</button>
       </div>
     </div>
   </form>

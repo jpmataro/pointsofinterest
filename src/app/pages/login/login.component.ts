@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +13,11 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
 
-  constructor( private formBuilder: FormBuilder) { 
+  constructor( 
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+    ) { 
     this.formCreate();
   }
 
@@ -33,12 +40,35 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm);
+    let userEmail = this.loginForm.get('user').value;
+    let password = this.loginForm.get('password').value;
+
     if(this.loginForm.invalid) {
       return Object.values(this.loginForm.controls).forEach(control => {
         control.markAsTouched();
       })
     }
+
+    Swal.fire({
+      allowOutsideClick: false,
+      text: 'Please wait...',
+      icon: 'info',
+    })
+
+    Swal.showLoading();
+
+    this.loginService.loginUser(userEmail, password).subscribe((result: any) => {
+      Swal.close();
+      this.router.navigateByUrl('/home');
+    }, (error: any) => {
+      console.error(error.error.error.message);
+      Swal.fire({
+        title: 'Authentication failed',
+        text: 'Invalid email or password',
+        icon: 'error',
+      })
+    })
+
   }
 
 }

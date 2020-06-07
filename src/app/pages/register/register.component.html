@@ -1,1 +1,57 @@
-<p>register works!</p>
+<section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Point of Interest
+        </h1>
+        <h2 class="subtitle">
+          Register
+        </h2>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="field">
+        <label for="email" class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input id="email" class="input" type="mail" placeholder="Email" [class.is-danger]="userValid" formControlName="user">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+        <p *ngIf="userValid" class="help is-danger">The field must contain an email</p>
+      </div>
+  
+      <div class="field">
+        <label for="password" class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input id="password" class="input" type="password" placeholder="Password" [class.is-danger]="passValid" formControlName="password">
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+        <p *ngIf="passValid" class="help is-danger">The field must contain a valid password</p>
+      </div>
+
+      <div class="field">
+        <label for="repeatPassword" class="label">Repeat password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input id="repeatPassword" class="input" type="password" placeholder="Repeat password" [class.is-danger]="passValid" formControlName="repeatPassword">
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+        <p *ngIf="passValid" class="help is-danger">Password not same</p>
+      </div>
+  
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary">Signin</button>
+        </div>
+        <div class="control">
+          <button class="button is-link" [routerLink]="['/login']">Back</button>
+        </div>
+      </div>
+    </form>
+  </section>
