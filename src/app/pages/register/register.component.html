@@ -31,18 +31,18 @@
             <i class="fas fa-key"></i>
           </span>
         </div>
-        <p *ngIf="passValid" class="help is-danger">The field must contain a valid password</p>
+        <p *ngIf="passValid" class="help is-danger">The field must contain a valid password (min 6 characters)</p>
       </div>
 
       <div class="field">
         <label for="repeatPassword" class="label">Repeat password</label>
         <div class="control has-icons-left has-icons-right">
-          <input id="repeatPassword" class="input" type="password" placeholder="Repeat password" [class.is-danger]="passValid" formControlName="repeatPassword">
+          <input id="repeatPassword" class="input" type="password" placeholder="Repeat password" [class.is-danger]="checkSamePass" formControlName="repeatPassword">
           <span class="icon is-small is-left">
             <i class="fas fa-key"></i>
           </span>
         </div>
-        <p *ngIf="passValid" class="help is-danger">Password not same</p>
+        <p *ngIf="checkSamePass" class="help is-danger">Password does not match</p>
       </div>
   
       <div class="field is-grouped">

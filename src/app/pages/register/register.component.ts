@@ -33,10 +33,17 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('password').invalid && this.registerForm.get('password').touched;
   }
 
+  get checkSamePass() {
+    const pass1 = this.registerForm.get('password').value;
+    const pass2 = this.registerForm.get('repeatPassword').value;
+
+    return ( pass1 === pass2 ) ? false : true;
+  }
+
   formCreate() {
     this.registerForm = this.formBuilder.group({
-      user:["", Validators.required],
-      password:["", Validators.required],
+      user:["", [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password:["", [Validators.required, Validators.minLength(6)]],
       repeatPassword:["", Validators.required],
     });
   }
