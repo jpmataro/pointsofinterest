@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InterestpointsService } from '../../services/interestpoints.service';
+import { Mark } from '../../classes/mark.class';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  itemsPoint: Mark[] = [];
+  isLoading: boolean = true;
+  emptyLocation: boolean;
 
-  ngOnInit(): void {
+  constructor(public interestPointService: InterestpointsService) {
+    this.interestPointService.loadPlaces().subscribe((resp) => {
+      this.itemsPoint = resp;
+      if (this.itemsPoint.length <= 0) {
+        this.emptyLocation = true;
+      } else {
+        this.emptyLocation = false;
+      }
+      this.isLoading = false;
+    });
+  }
+
+  ngOnInit() {
   }
 
 }

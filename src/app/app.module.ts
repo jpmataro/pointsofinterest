@@ -18,6 +18,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { AgmCoreModule } from '@agm/core';
 import { ViewmapComponent } from './pages/viewmap/viewmap.component';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +40,11 @@ import { ViewmapComponent } from './pages/viewmap/viewmap.component';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDea3f_x33GP65X7Qf2PO0aB22eMgn48II'
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
