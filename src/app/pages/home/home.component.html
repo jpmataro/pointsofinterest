@@ -40,8 +40,39 @@
         </div>
     </a>
     <div class="panel-block">
-        <button class="button is-link is-outlined is-fullwidth">
-        Reset all filters
+        <button class="button is-primary centered-btn" (click)="addNewLocation()">
+            Add new location
         </button>
     </div>
 </nav>
+
+<div #newModal class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Add new location</p>
+        </header>
+        <section class="modal-card-body">
+            <form id="save-point" [formGroup]="addPlaceForm" (ngSubmit)="addNewPlace()">
+                <div class="field">
+                  <label for="title" class="label">Site name</label>
+                  <div class="control">
+                    <input id="title" class="input" type="text" placeholder="Title" [class.is-danger]="titleValid" formControlName="title">
+                  </div>
+                  <p *ngIf="titleValid" class="help is-danger">The field must contain a title</p>
+                </div>
+            
+                <div class="field">
+                  <label for="password" class="label">Description</label>
+                  <div class="control">
+                    <input id="description" class="input" type="text" placeholder="Description" formControlName="description">
+                  </div>
+                </div>
+              </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" title="Add a new location" form="save-point">Add location</button>
+          <button class="button is-danger" title="Close this window" (click)="closeModal()">Close window</button>
+        </footer>
+      </div>
+</div>

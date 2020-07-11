@@ -12,6 +12,7 @@ export class LoginService {
 
   infoFireBaseUser: any;
   userToken: string;
+  uid: string;
 
   constructor(
     private http: HttpClient
@@ -30,15 +31,18 @@ export class LoginService {
     return this.http.post(this.url, authData).pipe(
       map(resp => {
         this.infoFireBaseUser = resp;
-        this.saveToken(resp['idToken']);
+        this.saveToken(resp['idToken'], resp['localId']);
         return resp;
       })
     );;
   }
 
-  private saveToken(idToken: string) {
+  private saveToken(idToken: string, localId: string) {
     this.userToken = idToken;
+    this.uid = localId;
+
     localStorage.setItem('token', idToken);
+    localStorage.setItem('uid', localId);
 
     let today = new Date();
     
@@ -73,6 +77,7 @@ export class LoginService {
   }
 
   logOut() {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    localStorage.removeItem('uid');
   }
 }
