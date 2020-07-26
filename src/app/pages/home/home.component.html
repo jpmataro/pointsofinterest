@@ -34,7 +34,7 @@
             <div class="level-right">
                 <div class="level-item">
                     <button class="button is-info"><i class="far fa-edit"></i></button>
-                    <button class="button is-danger"><i class="far fa-trash-alt"></i></button>
+                    <button class="button is-danger" (click)="interestPointService.removePlace(point.title)"><i class="far fa-trash-alt"></i></button>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
         <header class="modal-card-head">
           <p class="modal-card-title">Add new location</p>
         </header>
-        <section class="modal-card-body">
+        <section class="modal-card-body" *ngIf="!isSaving">
             <form id="save-point" [formGroup]="addPlaceForm" (ngSubmit)="addNewPlace()">
                 <div class="field">
                   <label for="title" class="label">Site name</label>
@@ -69,10 +69,16 @@
                   </div>
                 </div>
               </form>
-        </section>
+            </section>
+            <section class="modal-card-body" *ngIf="isSaving">
+                <div class="centered">
+                    <i class="fas fa-spinner fa-pulse fa-4x"></i>
+                    <p>Saving...</p>
+                </div>
+            </section>
         <footer class="modal-card-foot">
           <button class="button is-success" title="Add a new location" form="save-point">Add location</button>
-          <button class="button is-danger" title="Close this window" (click)="closeModal()">Close window</button>
+          <button class="button is-danger" title="Don't save location" (click)="closeModal()">Don't save location</button>
         </footer>
       </div>
 </div>

@@ -18,9 +18,16 @@ export class InterestpointsService {
     return this.points = this.pointsCollection.valueChanges();
    }
 
-   /* addPlace(location: Mark) {
-    this.db.collection('points').add(location);
-   } */
+   addPlace(pointToAdd: any) {
+     let docId = pointToAdd.title.replace(/ /g,"_");
+     // return this.db.collection('points').add(pointToAdd);
+     return this.db.collection('points').doc(docId).set(pointToAdd);
+   }
+
+   removePlace(locationId: string) {
+    locationId = locationId.replace(/ /g,"_");
+    return this.pointsCollection.doc(locationId).delete();
+   }
 
    /* editPlace() {
 
