@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   itemsPoint: Mark[] = [];
   isLoading: boolean = true;
   isSaving: boolean = false;
+  isEdit: boolean;
   emptyLocation: boolean;
 
   addPlaceForm: FormGroup;
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
 
     this.interestPointService.loadPlaces().subscribe((resp) => {
       this.itemsPoint = resp;
+      console.log(this.itemsPoint);
       if (this.itemsPoint.length <= 0) {
         this.emptyLocation = true;
       } else {
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
       }
       this.isLoading = false;
     });
+
   }
 
   ngOnInit() {
@@ -44,6 +47,7 @@ export class HomeComponent implements OnInit {
 
   formCreate() {
     this.addPlaceForm = this.formBuilder.group({
+      id: [""],
       title:["", [Validators.required, Validators.minLength(6)]],
       description:[""]
     });
@@ -54,6 +58,7 @@ export class HomeComponent implements OnInit {
   }
 
   addNewLocation() {
+    this.isEdit = false;
     this.el.nativeElement.classList.add('is-active');
   }
 
@@ -85,7 +90,32 @@ export class HomeComponent implements OnInit {
   }
 
   closeModal() {
+    this.addPlaceForm.reset();
     this.el.nativeElement.classList.remove('is-active');
+  }
+
+  editLocation(point: any) {
+    this.isEdit = true;
+    this.el.nativeElement.classList.add('is-active');
+
+    this.addPlaceForm.setValue({
+      id: point.id,
+      title: point.title,
+      description: point.desc
+    });
+    
+  }
+
+  editPlace() {
+    let pointToEdit: any = {
+      id: this.addPlaceForm.value.id,
+      title: this.addPlaceForm.value.title,
+      desc: this.addPlaceForm.value.description
+    }
+
+    this.interestPointService.editPlacePoint(pointToEdit);
+    this.closeModal();
+      this.isSaving = false;
   }
 
 }

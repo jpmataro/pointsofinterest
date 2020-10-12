@@ -34,7 +34,7 @@ export class LoginService {
         this.saveToken(resp['idToken'], resp['localId']);
         return resp;
       })
-    );;
+    );
   }
 
   private saveToken(idToken: string, localId: string) {
