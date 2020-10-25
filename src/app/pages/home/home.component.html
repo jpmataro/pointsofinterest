@@ -33,7 +33,7 @@
             </div>
             <div class="level-right">
                 <div class="level-item">
-                    <button class="button is-link">View in map</button>
+                    <button class="button is-link" (click)="viewInMap(point.id)">View in map</button>
                     <button class="button is-info" (click)="editLocation(point)"><i class="far fa-edit"></i></button>
                     <button class="button is-danger" (click)="interestPointService.removePlace(point.id)"><i class="far fa-trash-alt"></i></button>
                 </div>

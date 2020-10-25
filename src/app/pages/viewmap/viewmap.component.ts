@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { InterestpointsService } from '../../services/interestpoints.service';
+import { Mark } from '../../classes/mark.class';
 
 @Component({
   selector: 'app-viewmap',
@@ -7,7 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewmapComponent implements OnInit {
 
-  constructor() { }
+  /* pointInfo: any[] = []; */
+  pointInfo: Mark[] = [];
+
+  constructor(private activateRoute: ActivatedRoute,
+              public interestpointsService: InterestpointsService) { 
+    this.activateRoute.params.subscribe(param => {
+      this.interestpointsService.getPlace(param['id']).subscribe((pointMap: any) => {
+        this.pointInfo = pointMap.data();
+        console.log(this.pointInfo);
+      });
+    })
+  }
 
   ngOnInit(): void {
   }

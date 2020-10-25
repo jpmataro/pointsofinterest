@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
     this.interestPointService.loadPlaces().subscribe((resp) => {
       this.itemsPoint = resp;
-      console.log(this.itemsPoint);
+
       if (this.itemsPoint.length <= 0) {
         this.emptyLocation = true;
       } else {
@@ -116,6 +116,10 @@ export class HomeComponent implements OnInit {
     this.interestPointService.editPlacePoint(pointToEdit);
     this.closeModal();
       this.isSaving = false;
+  }
+
+  viewInMap(pointId: any) {
+    this.router.navigate(['/viewmap', pointId]);
   }
 
 }

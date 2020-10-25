@@ -11,7 +11,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path:'viewmap', component: ViewmapComponent, canActivate: [AuthGuard]},
+  {path:'viewmap/:id', component: ViewmapComponent, canActivate: [AuthGuard]},
   {path:'**', pathMatch:'full', redirectTo: 'login'},
 ];
 

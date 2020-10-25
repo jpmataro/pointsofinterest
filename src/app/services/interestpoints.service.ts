@@ -34,9 +34,13 @@ export class InterestpointsService {
    }
 
    editPlacePoint(point: any) {
-    return this.db.collection("points").doc(point.id).update({
+    return this.db.collection('points').doc(point.id).update({
       "title": point.title,
       "desc": point.desc
     });
+   }
+
+   getPlace(placeId: any) {
+      return this.db.collection('points').doc(placeId).get();
    }
 }
