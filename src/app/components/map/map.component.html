@@ -1,5 +1,5 @@
 <div class="box">
-    <agm-map [latitude]='latitude' [longitude]='longitude' [mapTypeId]='mapType' [zoom]='zoom'>
+    <agm-map [latitude]='mark.lat' [longitude]='mark.lng' [mapTypeId]='mapType' [zoom]='zoom'>
         <agm-marker [latitude]='mark.lat' [longitude]='mark.lng'>
             <agm-info-window>
                 <h2>{{ mark.title }}</h2>

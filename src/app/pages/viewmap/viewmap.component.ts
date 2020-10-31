@@ -18,7 +18,6 @@ export class ViewmapComponent implements OnInit {
     this.activateRoute.params.subscribe(param => {
       this.interestpointsService.getPlace(param['id']).subscribe((pointMap: any) => {
         this.pointInfo = pointMap.data();
-        console.log(this.pointInfo);
       });
     })
   }

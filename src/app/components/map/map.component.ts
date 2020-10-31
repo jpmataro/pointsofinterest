@@ -12,8 +12,8 @@ export class MapComponent implements OnInit {
 
   /* marks: Mark[] = []; */
 
-  latitude = 41.3947688;
-  longitude = 2.0787278;
+  latitude = 0;
+  longitude = 0;
   mapType = 'roadmap';
   zoom = 12;
   
