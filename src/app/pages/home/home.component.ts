@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   isSaving: boolean = false;
   isEdit: boolean;
   emptyLocation: boolean;
+  filteredUserPlaces: any = [];
 
   addPlaceForm: FormGroup;
 
@@ -31,7 +32,11 @@ export class HomeComponent implements OnInit {
     this.interestPointService.loadPlaces().subscribe((resp) => {
       this.itemsPoint = resp;
 
-      if (this.itemsPoint.length <= 0) {
+      this.filteredUserPlaces = resp.filter(data => {
+          return data.uid === localStorage.getItem('uid');
+      });
+
+      if (this.filteredUserPlaces.length <= 0) {
         this.emptyLocation = true;
       } else {
         this.emptyLocation = false;
